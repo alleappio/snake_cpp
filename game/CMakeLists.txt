@@ -10,5 +10,5 @@ include_directories(
     include
 )
 
-add_executable(game src/main.cpp src/snake.cpp)
+add_executable(game src/main.cpp src/snake.cpp src/food.cpp)
 target_link_libraries(game raylib)
