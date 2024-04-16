@@ -18,15 +18,13 @@ int main () {
   SetTargetFPS(60);
   
   int count = 0;
-  
-  Vector2 snakePos = {1,1};
 
-  Snake* snake = new Snake(&snakePos, CELLCOUNT, CELLSIZE);
+  Snake* snake = new Snake(CELLCOUNT, CELLSIZE);
 
   while(WindowShouldClose() == false){
     BeginDrawing();
 
-    DrawRectangle(snakePos.x*CELLSIZE, snakePos.y*CELLSIZE, CELLSIZE, CELLSIZE, darkGreen);
+    DrawRectangle(snake->getPosition().x*CELLSIZE, snake->getPosition().y*CELLSIZE, CELLSIZE, CELLSIZE, darkGreen);
     
     if(count%15==0){
       snake->update();
