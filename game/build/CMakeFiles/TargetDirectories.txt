@@ -1,0 +1,3 @@
+/home/appio/prove_raylib/game/build/CMakeFiles/game.dir
+/home/appio/prove_raylib/game/build/CMakeFiles/edit_cache.dir
+/home/appio/prove_raylib/game/build/CMakeFiles/rebuild_cache.dir
