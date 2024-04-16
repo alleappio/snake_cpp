@@ -19,7 +19,7 @@ int main () {
   
   int count = 0;
 
-  Snake* snake = new Snake(CELLCOUNT, CELLSIZE);
+  Snake* snake = new Snake(CELLCOUNT, CELLSIZE, darkGreen);
 
   while(WindowShouldClose() == false){
     BeginDrawing();
