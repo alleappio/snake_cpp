@@ -34,20 +34,22 @@ void Snake::setDirection(int direction){
 }
 
 void Snake::checkBorderCollision(){
-    if(this->snakePos.x <=0){
+    std::cout << "x:" << this->snakePos.x << " y:" << this->snakePos.y << std::endl;
+    std::cout << "direction:" << this->direction << std::endl;
+    if(this->snakePos.x == -1){
+        this->snakePos.x = this->cellCount-1;
+        //this->direction=5;
+    }
+    else if(this->snakePos.x == this->cellCount){
         this->snakePos.x = 0;
-        this->direction=5;
+        //this->direction=5;
     }
-    if(this->snakePos.x >=cellCount-1){
-        this->snakePos.x = cellCount-1;
-        this->direction=5;
+    if(this->snakePos.y == -1){
+        this->snakePos.y = this->cellCount-1;
+        //this->direction=5;
     }
-    if(this->snakePos.y <= 0){
+    else if(this->snakePos.y == this->cellCount){
         this->snakePos.y = 0;
-        this->direction=5;
-    }
-    if(this->snakePos.y >= cellCount-1){
-        this->snakePos.y = cellCount-1;
-        this->direction=5;
+        //this->direction=5;
     }
 }
