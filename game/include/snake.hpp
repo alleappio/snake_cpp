@@ -4,7 +4,6 @@ class Snake{
     public:
         Snake(int cellCount, int cellSize, Color snakeColor);
         void update();
-        Vector2 getPosition();
         void draw();
         void setDirection(int direction);
     

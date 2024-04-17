@@ -29,10 +29,6 @@ void Snake::draw(){
     DrawRectangle(this->snakePos.x*cellSize, this->snakePos.y*cellSize, cellSize, cellSize, this->snakeColor);
 }
 
-Vector2 Snake::getPosition(){
-    return this->snakePos;
-}
-
 void Snake::setDirection(int direction){
     this->direction=direction;
 }
