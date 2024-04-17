@@ -43,6 +43,9 @@ int main () {
     count++;
 
     snake->checkBorderCollision();
+    if(snake->checkFoodCollision(food->getPosition())){
+      food->update();
+    }
 
     ClearBackground(green);
     EndDrawing();

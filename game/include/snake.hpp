@@ -8,6 +8,7 @@ class Snake{
         void draw();
         void setDirection(int direction);
         void checkBorderCollision();
+        bool checkFoodCollision(Vector2 foodPos);
     
     private:
         Color snakeColor;

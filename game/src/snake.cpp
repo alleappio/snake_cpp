@@ -34,8 +34,6 @@ void Snake::setDirection(int direction){
 }
 
 void Snake::checkBorderCollision(){
-    std::cout << "x:" << this->snakePos.x << " y:" << this->snakePos.y << std::endl;
-    std::cout << "direction:" << this->direction << std::endl;
     if(this->snakePos.x == -1){
         this->snakePos.x = this->cellCount-1;
         //this->direction=5;
@@ -52,4 +50,11 @@ void Snake::checkBorderCollision(){
         this->snakePos.y = 0;
         //this->direction=5;
     }
+}
+
+bool Snake::checkFoodCollision(Vector2 foodPos){
+    if(foodPos.x == this->snakePos.x && foodPos.y == this->snakePos.y){
+        return true;
+    }
+    return false;
 }

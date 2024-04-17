@@ -10,7 +10,9 @@ Food::Food(int cellCount, int cellSize, Color foodColor){
 }
 
 void Food::update(){
-    //TODO
+    srand((unsigned) time(NULL));
+
+    this->foodPos = {rand()%cellCount, rand()%cellCount};
 }
 
 void Food::draw(){
