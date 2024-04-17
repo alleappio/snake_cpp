@@ -1,7 +1,9 @@
 #include "food.hpp"
 
 Food::Food(int cellCount, int cellSize, Color foodColor){
-    this->foodPos = {12, 12};
+    srand((unsigned) time(NULL));
+
+    this->foodPos = {rand()%cellCount, rand()%cellCount};
     this->cellCount = cellCount;
     this->cellSize = cellSize;
     this->foodColor = foodColor;

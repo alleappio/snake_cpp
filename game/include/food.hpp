@@ -1,4 +1,6 @@
 #include <raylib.h>
+#include <cstdlib>
+#include <iostream>
 
 class Food{
     public:
