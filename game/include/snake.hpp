@@ -6,6 +6,7 @@ class Snake{
         void update();
         void draw();
         void setDirection(int direction);
+        void checkBorderCollision();
     
     private:
         Color snakeColor;

@@ -40,11 +40,11 @@ int main () {
     if(count%15==0){
       snake->update();
     }
-
     count++;
 
-    ClearBackground(green);
+    snake->checkBorderCollision();
 
+    ClearBackground(green);
     EndDrawing();
   }
 

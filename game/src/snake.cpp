@@ -32,3 +32,22 @@ void Snake::draw(){
 void Snake::setDirection(int direction){
     this->direction=direction;
 }
+
+void Snake::checkBorderCollision(){
+    if(this->snakePos.x <=0){
+        this->snakePos.x = 0;
+        this->direction=5;
+    }
+    if(this->snakePos.x >=cellCount-1){
+        this->snakePos.x = cellCount-1;
+        this->direction=5;
+    }
+    if(this->snakePos.y <= 0){
+        this->snakePos.y = 0;
+        this->direction=5;
+    }
+    if(this->snakePos.y >= cellCount-1){
+        this->snakePos.y = cellCount-1;
+        this->direction=5;
+    }
+}
