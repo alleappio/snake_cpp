@@ -6,11 +6,12 @@ class Snake{
         void update();
         Vector2 getPosition();
         void draw();
+        void setDirection(int direction);
     
     private:
         Color snakeColor;
         Vector2 snakePos;
-        bool direction;
+        int direction;
         int cellCount;
         int cellSize;
 };

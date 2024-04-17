@@ -31,6 +31,12 @@ int main () {
     snake->draw();
     food->draw();
 
+    if (IsKeyDown(KEY_RIGHT)) snake->setDirection(0);
+    if (IsKeyDown(KEY_LEFT)) snake->setDirection(1);
+    if (IsKeyDown(KEY_DOWN)) snake->setDirection(2);
+    if (IsKeyDown(KEY_UP)) snake->setDirection(3);
+
+
     if(count%15==0){
       snake->update();
     }
