@@ -14,6 +14,39 @@ Color green = {173, 204, 96, 255};
 Color darkGreen = {43, 51, 24, 255};
 Color red = {100, 11, 11, 255};
 
+void gameloop(Snake* snake, Food* food, int& count, bool& run){
+  DrawText(TextFormat("SCORE: %i", snake->getLength()), CELLSIZE*CELLCOUNT-100, CELLSIZE, 20, darkGreen);
+
+  snake->draw();
+  food->draw();
+
+  int direction = snake->getDirection();
+  if (IsKeyDown(KEY_RIGHT) && direction!=1) snake->setDirection(0);
+  if (IsKeyDown(KEY_LEFT) && direction!=0) snake->setDirection(1);
+  if (IsKeyDown(KEY_DOWN) && direction!=3) snake->setDirection(2);
+  if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
+
+  if(count%10==0){
+    snake->update();
+    count=0;
+  }
+
+  count++;
+
+  snake->checkBorderCollision();
+  if(snake->checkFoodCollision(food->getPosition())){
+    food->update();
+    snake->increment();
+  }
+  if(snake->getLength()>2){
+    if(snake->checkCollisionWithItSelf()){
+      run=false;
+    }
+  }
+}
+
+
+
 int main () {
   std::cout << "INFO: starting..." << std::endl;
 
@@ -29,34 +62,7 @@ int main () {
     BeginDrawing();
 
     if(run){
-      DrawText(TextFormat("SCORE: %i", snake->getLength()), CELLSIZE*CELLCOUNT-100, CELLSIZE, 20, darkGreen);
-
-      snake->draw();
-      food->draw();
-
-      int direction = snake->getDirection();
-      if (IsKeyDown(KEY_RIGHT) && direction!=1) snake->setDirection(0);
-      if (IsKeyDown(KEY_LEFT) && direction!=0) snake->setDirection(1);
-      if (IsKeyDown(KEY_DOWN) && direction!=3) snake->setDirection(2);
-      if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
-
-
-      if(count%10==0){
-        snake->update();
-      }
-
-      count++;
-
-      snake->checkBorderCollision();
-      if(snake->checkFoodCollision(food->getPosition())){
-        food->update();
-        snake->increment();
-      }
-      if(snake->getLength()>2){
-        if(snake->checkCollisionWithItSelf()){
-          run=false;
-        }
-      }
+      gameloop(snake, food, count, run);
     }
     else{
       DrawText(TextFormat("GAME OVER"), CELLSIZE*CELLCOUNT/2-150, CELLSIZE*CELLCOUNT/2-50, 50, red);
