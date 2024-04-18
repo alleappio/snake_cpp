@@ -11,7 +11,7 @@ Snake::Snake(int cellCount, int cellSize, Color snakeColor){
 }
 
 void Snake::update(){
-    Vector2 segment = this->body.back();
+    Vector2 segment = this->body.front();
     segment.x += this->direction.x;
     segment.y += this->direction.y;
     this->body.pop_back();
@@ -19,11 +19,9 @@ void Snake::update(){
 }
 
 void Snake::draw(){
-    /*for(int i=0; i < this->length; i++)
-        DrawRectangle(this->body[i].x*cellSize, this->body[i].y-i*cellSize, cellSize, cellSize, this->snakeColor);
-    */
-    for (auto const& i : this->body) {
-        DrawRectangle(i.x*cellSize, i.y*cellSize, cellSize, cellSize, this->snakeColor);
+    //DrawRectangle(this->body.front().x*cellSize, this->body.front().y*cellSize, cellSize, cellSize, this->snakeColor);
+    for (std::list<Vector2>::const_iterator i = this->body.begin(); i != this->body.end(); ++i){
+        DrawRectangle(i->x*cellSize, i->y*cellSize, cellSize, cellSize, this->snakeColor);
     }
 }
 
@@ -84,6 +82,6 @@ bool Snake::checkFoodCollision(Vector2 foodPos){
 void Snake::increment(){
     this->length++;
     Vector2 segment = {this->body.front().x, this->body.front().y};
-    this->body.push_back(segment);
+    this->body.push_front(segment);
     std::cout << this->length << std::endl;
 }

@@ -38,7 +38,7 @@ int main () {
     if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
 
 
-    if(count%15==0){
+    if(count%10==0){
       snake->update();
     }
     count++;
