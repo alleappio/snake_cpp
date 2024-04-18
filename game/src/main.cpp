@@ -31,10 +31,11 @@ int main () {
     snake->draw();
     food->draw();
 
-    if (IsKeyDown(KEY_RIGHT)) snake->setDirection(0);
-    if (IsKeyDown(KEY_LEFT)) snake->setDirection(1);
-    if (IsKeyDown(KEY_DOWN)) snake->setDirection(2);
-    if (IsKeyDown(KEY_UP)) snake->setDirection(3);
+    int direction = snake->getDirection();
+    if (IsKeyDown(KEY_RIGHT) && direction!=1) snake->setDirection(0);
+    if (IsKeyDown(KEY_LEFT) && direction!=0) snake->setDirection(1);
+    if (IsKeyDown(KEY_DOWN) && direction!=3) snake->setDirection(2);
+    if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
 
 
     if(count%15==0){
@@ -45,6 +46,7 @@ int main () {
     snake->checkBorderCollision();
     if(snake->checkFoodCollision(food->getPosition())){
       food->update();
+      snake->increment();
     }
 
     ClearBackground(green);

@@ -6,6 +6,7 @@ Snake::Snake(int cellCount, int cellSize, Color snakeColor){
     this->cellSize = cellSize;
     this->direction = 5;
     this->snakeColor = snakeColor;
+    this->length = 1;
 }
 
 void Snake::update(){
@@ -33,6 +34,10 @@ void Snake::setDirection(int direction){
     this->direction=direction;
 }
 
+int Snake::getDirection(){
+    return this->direction;
+}
+
 void Snake::checkBorderCollision(){
     if(this->snakePos.x == -1){
         this->snakePos.x = this->cellCount-1;
@@ -57,4 +62,9 @@ bool Snake::checkFoodCollision(Vector2 foodPos){
         return true;
     }
     return false;
+}
+
+void Snake::increment(){
+    this->length++;
+    std::cout << this->length << std::endl;
 }
