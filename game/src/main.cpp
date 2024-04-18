@@ -25,40 +25,45 @@ int main () {
   Snake* snake = new Snake(CELLCOUNT, CELLSIZE, darkGreen);
   Food* food = new Food(CELLCOUNT, CELLSIZE, red);
   
-  while(WindowShouldClose() == false && run){
+  while(WindowShouldClose() == false){
     BeginDrawing();
 
-    snake->draw();
-    food->draw();
+    if(run){
+      DrawText(TextFormat("SCORE: %i", snake->getLength()), CELLSIZE*CELLCOUNT-100, CELLSIZE, 20, darkGreen);
 
-    int direction = snake->getDirection();
-    if (IsKeyDown(KEY_RIGHT) && direction!=1) snake->setDirection(0);
-    if (IsKeyDown(KEY_LEFT) && direction!=0) snake->setDirection(1);
-    if (IsKeyDown(KEY_DOWN) && direction!=3) snake->setDirection(2);
-    if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
+      snake->draw();
+      food->draw();
+
+      int direction = snake->getDirection();
+      if (IsKeyDown(KEY_RIGHT) && direction!=1) snake->setDirection(0);
+      if (IsKeyDown(KEY_LEFT) && direction!=0) snake->setDirection(1);
+      if (IsKeyDown(KEY_DOWN) && direction!=3) snake->setDirection(2);
+      if (IsKeyDown(KEY_UP) && direction!=2) snake->setDirection(3);
 
 
-    if(count%10==0){
-      snake->update();
-    }
+      if(count%10==0){
+        snake->update();
+      }
 
-    count++;
+      count++;
 
-    snake->checkBorderCollision();
-    if(snake->checkFoodCollision(food->getPosition())){
-      food->update();
-      snake->increment();
-    }
-    if(snake->getLength()>2){
-      if(snake->checkCollisionWithItSelf()){
-        run=false;
+      snake->checkBorderCollision();
+      if(snake->checkFoodCollision(food->getPosition())){
+        food->update();
+        snake->increment();
+      }
+      if(snake->getLength()>2){
+        if(snake->checkCollisionWithItSelf()){
+          run=false;
+        }
       }
     }
-
+    else{
+      DrawText(TextFormat("GAME OVER"), CELLSIZE*CELLCOUNT/2-150, CELLSIZE*CELLCOUNT/2-50, 50, red);
+    }
     ClearBackground(green);
     EndDrawing();
   }
-
   CloseWindow();
   return 0;
 }
