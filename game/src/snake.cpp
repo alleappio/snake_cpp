@@ -7,19 +7,24 @@ Snake::Snake(int cellCount, int cellSize, Color snakeColor){
     this->direction = {0,0};
     this->snakeColor = snakeColor;
     this->length = 1;
-    this->body.push_back(headPos);
+    this->body.push_front(headPos);
 }
 
 void Snake::update(){
-    this->headPos.x += this->direction.x;
-    this->headPos.y += this->direction.y;
+    Vector2 segment = this->body.back();
+    segment.x += this->direction.x;
+    segment.y += this->direction.y;
+    this->body.pop_back();
+    this->body.push_front(segment);
 }
 
 void Snake::draw(){
     /*for(int i=0; i < this->length; i++)
         DrawRectangle(this->body[i].x*cellSize, this->body[i].y-i*cellSize, cellSize, cellSize, this->snakeColor);
     */
-    DrawRectangle(this->headPos.x*cellSize, this->headPos.y*cellSize, cellSize, cellSize, this->snakeColor);
+    for (auto const& i : this->body) {
+        DrawRectangle(i.x*cellSize, i.y*cellSize, cellSize, cellSize, this->snakeColor);
+    }
 }
 
 void Snake::setDirection(int direction){
@@ -55,22 +60,22 @@ int Snake::getDirection(){
 }
 
 void Snake::checkBorderCollision(){
-    if(this->headPos.x == -1){
-        this->headPos.x = this->cellCount-1;
+    if(this->body.front().x == -1){
+        this->body.front().x = this->cellCount-1;
     }
-    else if(this->headPos.x == this->cellCount){
-        this->headPos.x = 0;
+    else if(this->body.front().x == this->cellCount){
+        this->body.front().x = 0;
     }
-    if(this->headPos.y == -1){
-        this->headPos.y = this->cellCount-1;
+    if(this->body.front().y == -1){
+        this->body.front().y = this->cellCount-1;
     }
-    else if(this->headPos.y == this->cellCount){
-        this->headPos.y = 0;
+    else if(this->body.front().y == this->cellCount){
+        this->body.front().y = 0;
     }
 }
 
 bool Snake::checkFoodCollision(Vector2 foodPos){
-    if(foodPos.x == this->headPos.x && foodPos.y == this->headPos.y){
+    if(foodPos.x == this->body.front().x && foodPos.y == this->body.front().y){
         return true;
     }
     return false;
@@ -78,7 +83,7 @@ bool Snake::checkFoodCollision(Vector2 foodPos){
 
 void Snake::increment(){
     this->length++;
-    Vector2 segment = {this->headPos.x, this->headPos.y};
+    Vector2 segment = {this->body.front().x, this->body.front().y};
     this->body.push_back(segment);
     std::cout << this->length << std::endl;
 }

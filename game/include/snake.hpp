@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include <iostream>
-#include <vector>
+#include <list>
 
 class Snake{
     public:
@@ -17,7 +17,7 @@ class Snake{
         Color snakeColor;
         Vector2 headPos;
         Vector2 direction;
-        std::vector<Vector2> body;
+        std::list<Vector2> body;
         int cellCount;
         int cellSize;
         int length;
