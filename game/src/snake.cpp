@@ -23,7 +23,7 @@ void Snake::draw(){
     /*for (std::list<Vector2>::const_iterator i = this->body.begin(); i != this->body.end(); ++i){
         DrawRectangle(i->x*cellSize, i->y*cellSize, cellSize, cellSize, this->snakeColor);
     }*/
-    for(auto const i : body){
+    for(auto const i : this->body){
         DrawRectangle(i.x*cellSize, i.y*cellSize, cellSize, cellSize, this->snakeColor);
     }
 }
@@ -60,6 +60,10 @@ int Snake::getDirection(){
     }
 }
 
+int Snake::getLength(){
+    return this->length;
+}
+
 void Snake::checkBorderCollision(){
     if(this->body.front().x == -1){
         this->body.front().x = this->cellCount-1;
@@ -83,12 +87,23 @@ bool Snake::checkFoodCollision(Vector2 foodPos){
 }
 
 bool Snake::checkCollisionWithItSelf(){
-
+    int count = 0;
+    for(auto const i : this->body){
+        if(count>0){
+            if(i.x == this->body.front().x &&
+               i.y == this->body.front().y){
+                
+                return true;
+            }
+        }
+        count++;
+    }
+    return false;
 }
 
 void Snake::increment(){
     this->length++;
-    Vector2 segment = {this->body.front().x, this->body.front().y};
-    this->body.push_front(segment);
+    Vector2 segment = {this->body.back().x, this->body.back().y};
+    this->body.push_back(segment);
     std::cout << this->length << std::endl;
 }

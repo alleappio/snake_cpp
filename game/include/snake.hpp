@@ -9,10 +9,12 @@ class Snake{
         void draw();
         void setDirection(int direction);
         int getDirection();
+        int getLength();
         void checkBorderCollision();
         bool checkFoodCollision(Vector2 foodPos);
         void increment();
         bool checkCollisionWithItSelf();
+        
     
     private:
         Color snakeColor;

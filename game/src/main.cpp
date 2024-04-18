@@ -21,11 +21,11 @@ int main () {
   SetTargetFPS(60);
   
   int count = 0;
-
+  bool run = true;
   Snake* snake = new Snake(CELLCOUNT, CELLSIZE, darkGreen);
   Food* food = new Food(CELLCOUNT, CELLSIZE, red);
   
-  while(WindowShouldClose() == false){
+  while(WindowShouldClose() == false && run){
     BeginDrawing();
 
     snake->draw();
@@ -41,12 +41,18 @@ int main () {
     if(count%10==0){
       snake->update();
     }
+
     count++;
 
     snake->checkBorderCollision();
     if(snake->checkFoodCollision(food->getPosition())){
       food->update();
       snake->increment();
+    }
+    if(snake->getLength()>2){
+      if(snake->checkCollisionWithItSelf()){
+        run=false;
+      }
     }
 
     ClearBackground(green);
