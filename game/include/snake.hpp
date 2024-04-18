@@ -12,6 +12,7 @@ class Snake{
         void checkBorderCollision();
         bool checkFoodCollision(Vector2 foodPos);
         void increment();
+        bool checkCollisionWithItSelf();
     
     private:
         Color snakeColor;

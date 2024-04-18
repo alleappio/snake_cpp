@@ -20,8 +20,11 @@ void Snake::update(){
 
 void Snake::draw(){
     //DrawRectangle(this->body.front().x*cellSize, this->body.front().y*cellSize, cellSize, cellSize, this->snakeColor);
-    for (std::list<Vector2>::const_iterator i = this->body.begin(); i != this->body.end(); ++i){
+    /*for (std::list<Vector2>::const_iterator i = this->body.begin(); i != this->body.end(); ++i){
         DrawRectangle(i->x*cellSize, i->y*cellSize, cellSize, cellSize, this->snakeColor);
+    }*/
+    for(auto const i : body){
+        DrawRectangle(i.x*cellSize, i.y*cellSize, cellSize, cellSize, this->snakeColor);
     }
 }
 
@@ -77,6 +80,10 @@ bool Snake::checkFoodCollision(Vector2 foodPos){
         return true;
     }
     return false;
+}
+
+bool Snake::checkCollisionWithItSelf(){
+
 }
 
 void Snake::increment(){
